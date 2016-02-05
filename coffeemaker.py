@@ -53,4 +53,4 @@ if __name__ == "__main__":
     GPIO.setup(PIN, GPIO.OUT)
     GPIO.output(PIN, True)
 
-    app.run()
+    app.run(host='0.0.0.0')

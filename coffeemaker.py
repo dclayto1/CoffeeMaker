@@ -9,11 +9,15 @@ on = "ON"
 status = ""
 
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
+@app.route("/", methods=["GET", "POST"])
+def coffee():
+
+    if request.method == "POST":
+        toggle() #calls toggle function below
+
     return render_template("coffeemaker.html", status=status)
 
 

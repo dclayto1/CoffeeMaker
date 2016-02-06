@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template("coffeemaker.html", status)
+    return render_template("coffeemaker.html", status=status)
 
 
 

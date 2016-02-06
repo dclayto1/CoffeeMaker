@@ -8,8 +8,8 @@
     <br>
     <h3><b>Status:</b> {{ status }}</h3>
 
-    <form action="/" method="post">
-        <button type="submit" value="On/Off" />
+    <form action="{{ url_for("coffee") }}" method="post">
+        <input type="submit" value="On/Off" />
     </form>
 
 

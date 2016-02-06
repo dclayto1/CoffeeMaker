@@ -9,18 +9,17 @@ on = "ON"
 status = ""
 
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def coffee():
 
     if request.method == "POST":
-        toggle() #calls toggle function below
+        toggleFunc() #calls toggle function below
+        return redirect(url_for("coffee"))
 
     return render_template("coffeemaker.html", status=status)
-
-
 
 
 
@@ -32,6 +31,8 @@ def coffee():
 #Making sure that the coffee pot is turned off if
 # server process ends
 def endProcess(signum, frame):
+    print "asdfasdf"
+    global status 
     status = off
     GPIO.output(PIN, False)
     GPIO.cleanup()
@@ -39,7 +40,8 @@ def endProcess(signum, frame):
 signal.signal(signal.SIGINT, endProcess)
 
 
-def toggle():
+def toggleFunc():
+    global status
     if(status == off):
         status = on
         GPIO.output(PIN, False)
@@ -57,4 +59,4 @@ if __name__ == "__main__":
     GPIO.setup(PIN, GPIO.OUT)
     GPIO.output(PIN, True)
 
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

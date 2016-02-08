@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import signal
 import sys
 
@@ -17,9 +17,9 @@ def coffee():
 
     if request.method == "POST":
         toggleFunc() #calls toggle function below
-        return redirect(url_for("coffee"))
+        #return redirect(url_for("coffee"))
 
-    return render_template("coffeemaker.html", status=status)
+    return render_template("coffeemaker_test.html", status=status)
 
 
 
@@ -33,8 +33,8 @@ def coffee():
 def endProcess(signum, frame):
     global status 
     status = off
-    GPIO.output(PIN, False)
-    GPIO.cleanup()
+    #GPIO.output(PIN, False)
+    #GPIO.cleanup()
     sys.exit(0)
 signal.signal(signal.SIGINT, endProcess)
 
@@ -43,19 +43,19 @@ def toggleFunc():
     global status
     if(status == off):
         status = on
-        GPIO.output(PIN, False)
+        #GPIO.output(PIN, False)
     else:
         status = off
-        GPIO.output(PIN, True)
+        #GPIO.output(PIN, True)
 
 
 
 #Runs the Flask application
 if __name__ == "__main__":
     status = off
-    GPIO.cleanup()
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(PIN, GPIO.OUT)
-    GPIO.output(PIN, True)
+    #GPIO.cleanup()
+    #GPIO.setmode(GPIO.BOARD)
+    #GPIO.setup(PIN, GPIO.OUT)
+    #GPIO.output(PIN, True)
 
     app.run(host='0.0.0.0', debug=True)

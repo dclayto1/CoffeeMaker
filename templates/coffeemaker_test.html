@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head><title>Coffee Maker</title></head>
+
+<body>
+<script src="http:/code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    <h1><u>Coffee Maker</u></h1>
+
+    <br>
+    <h3><b>Status:</b> {{ status }}</h3>
+
+<!--    <form action="{{ url_for("coffee") }}" method="post"> -->
+        <!--<input type="submict" value="On/Off" />-->
+        <button id="toggle" onClick="toggle()">On/Off</button>
+<!--    </form> -->
+
+
+
+
+
+<script type="text/javascript">
+function toggle() {
+	$.post({
+		url: "{{"
+
+	});
+
+	/*var request = new XMLHttpRequest();
+	request.onLoad = function(){};
+
+	request.open("POST", "{{ url_for("coffee") }}", true);
+	request.send();*/
+
+
+};
+</script>
+
+
+</body>
+</html>

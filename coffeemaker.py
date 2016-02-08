@@ -17,10 +17,15 @@ def coffee():
 
     if request.method == "POST":
         toggleFunc() #calls toggle function below
-        return redirect(url_for("coffee"))
+        #return redirect(url_for("coffee"))
 
-    return render_template("coffeemaker.html", status=status)
+    return render_template("coffeemaker_test.html", status=status)
 
+@app.route("/status", methods=["GET"])
+def status():
+    global status
+    data = {"value" : status}
+    return jsonify(data)
 
 
 ##################################

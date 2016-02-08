@@ -10,9 +10,51 @@
     <br>
     <h3><b>Status:</b> {{ status }}</h3>
 
-    <form action="{{ url_for("coffee") }}" method="post">
-        <input type="submit" value="On/Off" />
-    </form>
+    <button id="toggle" name="toggle">On/Off</button>
+
+
+
+
+
+<script type="text/javascript">
+$(function() {
+    $("#toggle").click(function() {
+    	$.ajax({
+    		type: "POST",
+    		url: "{{ url_for('coffee') }}",
+    		success: function(){}
+    	});
+
+
+         $.ajax({
+            type: "GET",
+            url: "{{ url_for('status') }}",
+            success: function(data) {
+                $('#status').text(data.value);
+            }
+        });     
+    });
+
+    function getStatus(){
+	    $.ajax({
+	    	type: "GET",
+	    	url: "{{ url_for('status') }}",
+	    	success: function(data) {
+	    		$('#status').text(data.value);
+	    	},
+	    	complete: function() {
+	    		setTimeout(getStatus, 1000);
+	    	}
+
+	    });
+    };
+
+    getStatus();
+
+
+  });
+</script>
+
 
 
 

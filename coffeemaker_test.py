@@ -9,7 +9,7 @@ on = "ON"
 status = ""
 
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -21,7 +21,11 @@ def coffee():
 
     return render_template("coffeemaker_test.html", status=status)
 
-
+@app.route("/status", methods=["GET"])
+def status():
+    global status
+    data = {"value" : status}
+    return jsonify(data)
 
 ##################################
 # Functions for webserver to use #
